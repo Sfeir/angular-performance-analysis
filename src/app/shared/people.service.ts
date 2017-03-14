@@ -23,8 +23,8 @@ export class PeopleService {
   fake() {
     return {
       "email": faker.internet.email(),
-      "lastname": faker.name.lastname,
-      "firstname": faker.name.firstname,
+      "lastname": faker.name.lastName(),
+      "firstname": faker.name.firstName(),
       "gender": (faker.random.number()%2===0)?"male":"female",
       //"photo": `https://randomuser.me/portraits/${(faker.random.number()%2===0)?"men":"women"}/${(Math.random()*10|0)}.jpg`,
       // "photo": faker.image.people(),
