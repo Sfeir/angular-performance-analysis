@@ -1,0 +1,61 @@
+<md-card class="md-whiteframe-2dp">
+    <md-card-title-group>
+        <img class="picture" md-card-md-image src="{{ person.photo }}" onerror="this.src = 'assets/images/profile.svg'">
+        <md-card-title>
+            <a>
+                <span>{{ person.firstName | uppercase }} {{ person.lastName | uppercase}}</span>
+            </a>
+        </md-card-title>
+        <md-card-subtitle class="function">{{ person.functionName }}</md-card-subtitle>
+        <md-card-subtitle class="contact-info">
+            <md-icon>
+                <img src="assets/images/icon-mail.svg">
+            </md-icon>
+            <a href="mailto:{{ person.firstName }} {{ person.lastName }}&lt;{{ person.email }}&gt;" title="Send an email to {{ person.firstname }} {{ person.lastname }}" class="truncate">{{ person.email}}</a>
+        </md-card-subtitle>
+        <md-card-subtitle class="contact-info">
+            <md-icon>
+                <img src="assets/images/icon-phone.svg">
+            </md-icon>
+            <a href="tel:{{ person.contactInfoPro?.mobilePhone }}" title="Call {{ person.firstname }}">{{ person.contactInfoPro?.mobilePhone }}</a>
+        </md-card-subtitle>
+
+    </md-card-title-group>
+    <md-card-content>
+        <div class="contact-info">
+            Manager&nbsp;:&nbsp;
+            <a *ngIf="person.manager">{{ person.manager }}</a>
+            <span *ngIf="!person.manager">N/A</span>
+        </div>
+        <div class="contact-info">
+            Localisation : <a href="http://www.sfeir.com/contact/">{{person.entity}}</a>
+        </div>
+
+        <section *ngIf="!isExpanded && selectedSkill">
+            <h3 class="style-scope people-card">Compétences</h3>
+            <section class="skills">
+                <button md-raised-button *ngFor="let skill of person.skills" [class.hl]="skill?.toLowerCase() == selectedSkill?.toLowerCase()" (click)="searchBySkill(skill)">
+                    {{ skill }}
+                </button>
+            </section>
+        </section>
+    </md-card-content>
+
+    <md-card-actions>
+        <div class="links">
+            <a *ngIf="person.twitter" target="_blank" href="https://twitter.com/{{person.twitter}}">
+                <img src="assets/images/md-twitter.svg">
+            </a>
+            <a *ngIf="person.slack" href="https://sfeirgroup.slack.com/messages/@{{person.slack}}/">
+                <img src="assets/images/md-slack.svg">
+            </a>
+            <a *ngIf="person.github" href="https://github.com/{{person.github}}">
+                <img src="assets/images/md-github.svg">
+            </a>
+            <a *ngIf="person.linkedIn" href="{{person.linkedIn}}">
+                <img src="assets/images/md-linkedin.svg">
+            </a>
+        </div>
+    </md-card-actions>
+
+</md-card>
